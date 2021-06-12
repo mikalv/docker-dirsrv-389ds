@@ -1,10 +1,12 @@
 FROM centos:7
 
-LABEL maintainer "Kamesh Sampath<kamesh.sampath@hotmail.com>" \
+LABEL maintainer "Mikal Villa <mikalv@mikalv.net>" \
       name="389ds" \
-      vendor="Kamesh Sampath<kamesh.sampath@hotmail.com>" \
+      vendor="Mikal Villa <mikalv@mikalv.net>" \
       license="ASL v2"\
       build-date="20170409"
+
+ARG arch=amd64
 
 COPY confd /etc/confd
 
@@ -13,7 +15,7 @@ COPY scripts/install-and-run-389ds.sh /install-and-run-389ds.sh
 RUN  yum -y install curl hostname httpd authconfig nss-tools && \
      yum -y install java-1.8.0-openjdk-headless  openssl procps-pg coreutils && \
      yum -y install 389-ds-base.x86_64 openldap-clients && \ 
-     curl -qL https://github.com/kelseyhightower/confd/releases/download/v0.11.0/confd-0.11.0-linux-amd64 -o /usr/local/bin/confd && \
+     curl -qL https://github.com/kelseyhightower/confd/releases/download/v0.11.0/confd-0.11.0-linux-$arch -o /usr/local/bin/confd && \
      chmod +x /usr/local/bin/confd && \
      chmod +x /install-and-run-389ds.sh && \
      sed -i 's/checkHostname {/checkHostname {\nreturn();/g' /usr/lib64/dirsrv/perl/DSUtil.pm  && \
