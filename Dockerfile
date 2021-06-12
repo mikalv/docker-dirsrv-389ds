@@ -14,7 +14,7 @@ COPY scripts/install-and-run-389ds.sh /install-and-run-389ds.sh
 
 RUN  yum -y install curl hostname httpd authconfig nss-tools && \
      yum -y install java-1.8.0-openjdk-headless  openssl procps-pg coreutils && \
-     yum -y install 389-ds-base.x86_64 openldap-clients && \ 
+     yum -y install 389-ds-base openldap-clients && \ 
      curl -qL https://github.com/kelseyhightower/confd/releases/download/v0.16.0/confd-0.16.0-linux-$arch -o /usr/local/bin/confd && \
      chmod +x /usr/local/bin/confd && \
      chmod +x /install-and-run-389ds.sh && \
